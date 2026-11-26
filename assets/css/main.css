@@ -16,7 +16,7 @@
   src: url("../fonts/inter-latin-wght-italic.woff2") format("woff2");
   font-weight: 100 900;
   font-style: italic;
-  font-display: swap;
+  font-display: optional; /* italics never swap in mid-read (no layout shift) */
 }
 @font-face {
   font-family: "JetBrains Mono";
@@ -30,7 +30,7 @@
   src: url("../fonts/jetbrains-mono-latin-wght-italic.woff2") format("woff2");
   font-weight: 100 800;
   font-style: italic;
-  font-display: swap;
+  font-display: optional;
 }
 
 /* ---------- Tokens ---------- */
