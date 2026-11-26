@@ -1,0 +1,18 @@
+{{ define "main" }}
+<header class="wrap page-head">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="page-intro">{{ . }}</div>
+  {{- end }}
+</header>
+
+<div class="wrap">
+  {{- $pager := .Paginator }}
+  {{- with $pager.Pages }}
+    {{ partial "post-list.html" (dict "pages" . "level" 2 "summary" true) }}
+  {{- else }}
+  <p class="empty">{{ T "no_posts" }}</p>
+  {{- end }}
+  {{ partial "pager.html" $pager }}
+</div>
+{{ end }}

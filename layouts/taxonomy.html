@@ -1,0 +1,13 @@
+{{ define "main" }}
+<header class="wrap page-head">
+  <h1 class="page-title">{{ T "all_tags" }}</h1>
+</header>
+
+<div class="wrap">
+  <ul class="tag-index">
+    {{- range .Pages.ByTitle }}
+    <li><a href="{{ .RelPermalink }}">#{{ .LinkTitle }} <span class="count">{{ len .Pages }}</span></a></li>
+    {{- end }}
+  </ul>
+</div>
+{{ end }}

@@ -1,0 +1,7 @@
+{{- /* Params: page (Page), long (bool: long date format) */ -}}
+{{- $p := .page -}}
+<p class="meta">
+  <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format (cond (.long | default false) ":date_long" ":date_medium") }}</time>
+  <span aria-hidden="true">·</span>
+  <span>{{ T "reading_time" $p.ReadingTime }}</span>
+</p>

@@ -1,0 +1,75 @@
+# Build the Hugo site and publish it to GitHub Pages on every push to main.
+# One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time; don't cancel a deployment that's in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.170.1
+      TZ: Asia/Jakarta
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Install Hugo
+        run: |
+          cd "${RUNNER_TEMP}"
+          base="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
+          curl -sSfLO "${base}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          curl -sSfLO "${base}/hugo_${HUGO_VERSION}_checksums.txt"
+          sha256sum --check --ignore-missing "hugo_${HUGO_VERSION}_checksums.txt"
+          mkdir -p "${HOME}/.local/hugo"
+          tar -C "${HOME}/.local/hugo" -xzf "hugo_${HUGO_VERSION}_linux-amd64.tar.gz" hugo
+          echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          # GitHub may report http:// for a custom domain until its certificate
+          # is issued; always build https:// links.
+          base_url="${PAGES_BASE_URL/#http:\/\//https://}/"
+          echo "Base URL: ${base_url}"
+          hugo version
+          hugo build --gc --minify --baseURL "${base_url}"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

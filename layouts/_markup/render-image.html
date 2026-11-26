@@ -1,0 +1,56 @@
+{{- /*
+  Markdown images → responsive WebP with srcset when the image is a page
+  resource (an image in the post's folder) or a global resource (assets/).
+  Standalone images become <figure>; the optional title becomes the caption:
+    ![Alt text](photo.jpg "Caption")
+*/ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{- $srcset := "" -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
+    {{- $orig := . -}}
+    {{- if in (slice "jpeg" "png" "webp") $orig.MediaType.SubType -}}
+      {{- $main := $orig -}}
+      {{- if gt $orig.Width 1200 -}}
+        {{- $main = $orig.Resize "1200x webp q80" -}}
+      {{- else -}}
+        {{- $main = $orig.Process "webp q80" -}}
+      {{- end -}}
+      {{- $set := slice -}}
+      {{- range slice 480 800 -}}
+        {{- if lt . $main.Width -}}
+          {{- $r := $orig.Resize (printf "%dx webp q80" .) -}}
+          {{- $set = $set | append (printf "%s %dw" $r.RelPermalink $r.Width) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $set = $set | append (printf "%s %dw" $main.RelPermalink $main.Width) -}}
+      {{- $src = $main.RelPermalink -}}
+      {{- $srcset = delimit $set ", " -}}
+      {{- $width = $main.Width -}}
+      {{- $height = $main.Height -}}
+    {{- else -}}
+      {{- $src = $orig.RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $sizes := "(min-width: 46rem) 42rem, 100vw" -}}
+{{- if .IsBlock -}}
+<figure>
+  <img src="{{ $src }}" alt="{{ .PlainText }}"
+    {{- with $srcset }} srcset="{{ . }}" sizes="{{ $sizes }}"{{ end }}
+    {{- with $width }} width="{{ . }}" height="{{ $height }}"{{ end }} loading="lazy" decoding="async">
+  {{- with .Title }}
+  <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>
+{{- else -}}
+<img src="{{ $src }}" alt="{{ .PlainText }}"
+  {{- with $srcset }} srcset="{{ . }}" sizes="{{ $sizes }}"{{ end }}
+  {{- with $width }} width="{{ . }}" height="{{ $height }}"{{ end }}
+  {{- with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- end -}}
+{{- /**/ -}}

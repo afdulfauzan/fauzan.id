@@ -1,0 +1,106 @@
+# =====================================================================
+#  fauzan.id — konfigurasi Hugo
+#  Bagian yang perlu diganti ditandai dengan:  # GANTI
+# =====================================================================
+
+baseURL = "https://fauzan.id/"
+title = "fauzan.id"
+timeZone = "Asia/Jakarta"
+enableRobotsTXT = true
+capitalizeListTitles = false         # tag tetap huruf kecil: #hugo, bukan #Hugo
+
+# Bahasa utama = Indonesia (di root: fauzan.id/), English di fauzan.id/en/
+defaultContentLanguage = "id"
+defaultContentLanguageInSubdir = false
+
+[pagination]
+  pagerSize = 10                     # jumlah tulisan per halaman di /blog/
+
+[taxonomies]
+  tag = "tags"                       # hanya pakai tag (tanpa kategori)
+
+[services.rss]
+  limit = 20
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]
+  taxonomy = ["html"]
+  term = ["html", "rss"]
+  page = ["html"]
+
+[markup]
+  [markup.goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false   # gambar sendirian → <figure>
+  [markup.highlight]
+    noClasses = false                # warna syntax highlight diatur lewat CSS (monochrome)
+    codeFences = true
+    guessSyntax = false
+
+# ---------------------------------------------------------------------
+#  Data pribadi (dipakai di semua bahasa)
+# ---------------------------------------------------------------------
+[params]
+  author = "Fauzan"                  # GANTI: nama yang ditampilkan
+  email = "halo@fauzan.id"           # GANTI: email untuk halaman Contact
+  monochromeImages = false           # true = gambar di tulisan tampil grayscale
+
+  # Link sosial (tampil di halaman Contact & footer). Tambah/hapus sesuka hati.
+  [[params.social]]
+    name = "Telegram"
+    url = "https://t.me/magdoarch"
+    handle = "@magdoarch"
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/afdulfauzan"
+    handle = "@afdulfauzan"
+  # [[params.social]]
+  #   name = "LinkedIn"
+  #   url = "https://www.linkedin.com/in/USERNAME"
+  #   handle = "in/USERNAME"
+  # [[params.social]]
+  #   name = "Instagram"
+  #   url = "https://www.instagram.com/USERNAME"
+  #   handle = "@USERNAME"
+
+# ---------------------------------------------------------------------
+#  Bahasa
+# ---------------------------------------------------------------------
+[languages]
+  [languages.id]
+    label = "Bahasa Indonesia"
+    locale = "id-ID"
+    weight = 1
+    [languages.id.params]
+      description = "Blog pribadi Fauzan: catatan seputar teknologi, web, dan hal-hal yang sedang dipelajari."  # GANTI
+    [[languages.id.menus.main]]
+      name = "Beranda"
+      pageRef = "/"
+      weight = 10
+    [[languages.id.menus.main]]
+      name = "Blog"
+      pageRef = "/blog"
+      weight = 20
+    [[languages.id.menus.main]]
+      name = "Kontak"
+      pageRef = "/contact"
+      weight = 30
+
+  [languages.en]
+    label = "English"
+    locale = "en-US"
+    weight = 2
+    [languages.en.params]
+      description = "Fauzan's personal blog: notes on technology, the web, and things I'm learning."  # GANTI
+    [[languages.en.menus.main]]
+      name = "Home"
+      pageRef = "/"
+      weight = 10
+    [[languages.en.menus.main]]
+      name = "Blog"
+      pageRef = "/blog"
+      weight = 20
+    [[languages.en.menus.main]]
+      name = "Contact"
+      pageRef = "/contact"
+      weight = 30

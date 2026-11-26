@@ -1,0 +1,10 @@
+<h{{ .Level }} id="{{ .Anchor }}"
+  {{- range $k, $v := .Attributes }}
+    {{- if and $v (ne $k "id") }}
+      {{- printf " %s=%q" $k ($v | transform.HTMLEscape) | safeHTMLAttr }}
+    {{- end }}
+  {{- end }}>
+  {{- .Text -}}
+  <a class="anchor" href="#{{ .Anchor }}" aria-label="{{ T "anchor_link" }}">#</a>
+</h{{ .Level }}>
+{{- /**/ -}}

@@ -1,0 +1,40 @@
+{{ define "main" }}
+<header class="wrap page-head">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="page-intro">{{ . }}</div>
+  {{- end }}
+</header>
+
+<div class="wrap">
+  <ul class="link-rows" aria-label="{{ T "contact_links" }}">
+    {{- with site.Params.email }}
+    <li>
+      <a href="mailto:{{ . }}">
+        <span class="row-label">Email</span>
+        <span class="row-value">{{ . }}</span>
+        <span class="row-arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    {{- end }}
+    {{- range site.Params.social }}
+    <li>
+      <a href="{{ .url }}" rel="me noopener">
+        <span class="row-label">{{ .name }}</span>
+        <span class="row-value">{{ .handle | default .url }}</span>
+        <span class="row-arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    {{- end }}
+    {{- with site.Home.OutputFormats.Get "rss" }}
+    <li>
+      <a href="{{ .RelPermalink }}">
+        <span class="row-label">RSS</span>
+        <span class="row-value">{{ strings.TrimPrefix "https://" (strings.TrimPrefix "http://" .Permalink) }}</span>
+        <span class="row-arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+</div>
+{{ end }}

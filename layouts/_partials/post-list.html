@@ -1,0 +1,19 @@
+{{- /* Params: pages (Pages), level (heading level, default 2), summary (bool) */ -}}
+{{- $level := .level | default 2 -}}
+{{- $summary := .summary | default false -}}
+<ol class="post-list">
+  {{- range .pages }}
+  <li class="post-item">
+    <h{{ $level }} class="post-item-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h{{ $level }}>
+    {{ partial "post-meta.html" (dict "page" .) }}
+    {{- if $summary }}
+      {{- $text := .Description }}
+      {{- if not $text }}{{ $text = .Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}
+      {{- with $text }}
+    <p class="post-item-summary">{{ . }}</p>
+      {{- end }}
+      {{- partial "tags.html" . }}
+    {{- end }}
+  </li>
+  {{- end }}
+</ol>

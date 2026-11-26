@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="wrap hero">
+  <h1 class="hero-title">{{ .Params.heading | default site.Title }}</h1>
+  {{- with .Content }}
+  <div class="hero-text">{{ . }}</div>
+  {{- end }}
+</section>
+
+<section class="wrap block" aria-labelledby="latest-posts">
+  <h2 class="label" id="latest-posts">{{ T "latest_posts" }}</h2>
+  {{- $posts := where site.RegularPages "Section" "blog" }}
+  {{- with first 5 $posts }}
+    {{ partial "post-list.html" (dict "pages" . "level" 3) }}
+  {{- else }}
+  <p class="empty">{{ T "no_posts" }}</p>
+  {{- end }}
+  {{- if gt (len $posts) 0 }}
+    {{- with site.GetPage "/blog" }}
+  <p class="more"><a href="{{ .RelPermalink }}">{{ T "all_posts" }} <span aria-hidden="true">→</span></a></p>
+    {{- end }}
+  {{- end }}
+</section>
+{{ end }}

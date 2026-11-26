@@ -1,0 +1,36 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>{{ site.Title }}</a>
+
+    <nav class="nav" aria-label="{{ T "nav_main" }}">
+      <ul>
+        {{- $page := . }}
+        {{- range site.Menus.main }}
+          {{- $current := "" }}
+          {{- if $page.IsMenuCurrent "main" . }}
+            {{- $current = "page" }}
+          {{- else if and .Page (not .Page.IsHome) ($page.IsDescendant .Page) }}
+            {{- $current = "true" }}
+          {{- end }}
+        <li><a href="{{ .URL }}"{{ with $current }} aria-current="{{ . }}"{{ end }}>{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+
+    <div class="tools">
+      {{- /* Language switch: go to this page's translation, or that language's home */}}
+      {{- range site.Home.AllTranslations }}
+        {{- if ne .Language.Name $page.Language.Name }}
+          {{- $target := . }}
+          {{- range $page.Translations }}
+            {{- if eq .Language.Name $target.Language.Name }}{{ $target = . }}{{ end }}
+          {{- end }}
+      <a class="tool lang" href="{{ $target.RelPermalink }}" hreflang="{{ .Language.Name }}" lang="{{ .Language.Name }}" title="{{ .Language.Label }}" aria-label="{{ .Language.Label }}">{{ upper .Language.Name }}</a>
+        {{- end }}
+      {{- end }}
+      <button class="tool theme-toggle" type="button" data-theme-toggle aria-label="{{ T "dark_mode" }}" aria-pressed="false" title="{{ T "dark_mode" }}">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,47 @@
+{{ define "main" }}
+{{- $isPost := eq .Section "blog" }}
+<article class="wrap post">
+  <header class="post-head">
+    {{- if $isPost }}
+      {{- with .Parent }}
+    <a class="back" href="{{ .RelPermalink }}"><span aria-hidden="true">←</span> {{ T "back_to_blog" }}</a>
+      {{- end }}
+    {{- end }}
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if $isPost }}
+      {{ partial "post-meta.html" (dict "page" . "long" true) }}
+      {{- partial "tags.html" . }}
+    {{- end }}
+  </header>
+
+  <div class="prose{{ if site.Params.monochromeImages }} mono-img{{ end }}">
+    {{ .Content }}
+  </div>
+
+  {{- if $isPost }}
+    {{- /* Explicit date order: older ← this post → newer */}}
+    {{- $byDate := .CurrentSection.RegularPages.ByDate }}
+    {{- $i := $byDate.IndexOf . }}
+    {{- $older := false }}
+    {{- $newer := false }}
+    {{- if gt $i 0 }}{{ $older = index $byDate (sub $i 1) }}{{ end }}
+    {{- if and (ge $i 0) (lt (add $i 1) (len $byDate)) }}{{ $newer = index $byDate (add $i 1) }}{{ end }}
+    {{- if or $older $newer }}
+  <nav class="post-nav" aria-label="{{ T "post_navigation" }}">
+      {{- with $older }}
+    <a class="post-nav-prev" href="{{ .RelPermalink }}" rel="prev">
+      <span class="post-nav-label"><span aria-hidden="true">←</span> {{ T "prev_post" }}</span>
+      <span class="post-nav-title">{{ .LinkTitle }}</span>
+    </a>
+      {{- end }}
+      {{- with $newer }}
+    <a class="post-nav-next" href="{{ .RelPermalink }}" rel="next">
+      <span class="post-nav-label">{{ T "next_post" }} <span aria-hidden="true">→</span></span>
+      <span class="post-nav-title">{{ .LinkTitle }}</span>
+    </a>
+      {{- end }}
+  </nav>
+    {{- end }}
+  {{- end }}
+</article>
+{{ end }}

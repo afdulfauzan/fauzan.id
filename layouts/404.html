@@ -1,0 +1,18 @@
+{{ define "main" }}
+<section class="wrap hero notfound">
+  <p class="eyebrow">404</p>
+  <h1 class="hero-title">{{ T "not_found_title" }}</h1>
+  <div class="hero-text"><p>{{ T "not_found_text" }}</p></div>
+  <p class="more"><a href="{{ site.Home.RelPermalink }}"><span aria-hidden="true">←</span> {{ T "back_home" }}</a></p>
+
+  {{- /* GitHub Pages only serves the root 404.html, so also greet visitors in the other language(s). */}}
+  {{- range site.Home.AllTranslations }}
+    {{- if ne .Language.Name site.Language.Name }}
+  <p class="notfound-alt" lang="{{ .Language.Name }}">
+    {{ .Language.Translate "not_found_title" }}.
+    <a href="{{ .RelPermalink }}">{{ .Language.Translate "back_home" }} <span aria-hidden="true">→</span></a>
+  </p>
+    {{- end }}
+  {{- end }}
+</section>
+{{ end }}

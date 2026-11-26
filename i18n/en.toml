@@ -1,0 +1,34 @@
+skip_to_content = "Skip to content"
+nav_main = "Main navigation"
+dark_mode = "Dark mode"
+switch_language = "Read in another language"
+
+latest_posts = "Latest posts"
+all_posts = "All posts"
+no_posts = "No posts yet."
+back_to_blog = "Blog"
+newer = "Newer"
+older = "Older"
+page_of = "{{ .Current }} / {{ .Total }}"
+pagination = "Pagination"
+prev_post = "Previous"
+next_post = "Next"
+post_navigation = "More posts"
+anchor_link = "Link to this section"
+
+tags = "Tags"
+all_tags = "All tags"
+tagged = "Posts tagged"
+
+contact_links = "Contact and links"
+
+not_found_title = "Page not found"
+not_found_text = "The page you're looking for doesn't exist or has moved."
+back_home = "Back to home"
+
+rss_description = "Latest posts on {{ .Title }}"
+page_n = "Page {{ .Count }}"
+
+[reading_time]
+one = "{{ .Count }} min read"
+other = "{{ .Count }} min read"
