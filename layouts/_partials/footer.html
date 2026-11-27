@@ -2,9 +2,6 @@
   <div class="wrap footer-inner">
     <p>© {{ now.Year }} {{ site.Params.author }}</p>
     <ul class="footer-links">
-      {{- with site.Home.OutputFormats.Get "rss" }}
-      <li><a href="{{ .RelPermalink }}">RSS</a></li>
-      {{- end }}
       {{- range site.Params.social }}
         {{- if not .floating }}
       <li><a href="{{ .url }}" rel="me noopener">{{ .name }}</a></li>

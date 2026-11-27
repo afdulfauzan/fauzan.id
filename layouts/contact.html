@@ -26,15 +26,6 @@
       </a>
     </li>
     {{- end }}
-    {{- with site.Home.OutputFormats.Get "rss" }}
-    <li>
-      <a href="{{ .RelPermalink }}">
-        <span class="row-label">RSS</span>
-        <span class="row-value">{{ strings.TrimPrefix "https://" (strings.TrimPrefix "http://" .Permalink) }}</span>
-        <span class="row-arrow" aria-hidden="true">↗</span>
-      </a>
-    </li>
-    {{- end }}
   </ul>
 </div>
 {{ end }}
