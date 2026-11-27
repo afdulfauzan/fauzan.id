@@ -46,7 +46,7 @@ defaultContentLanguageInSubdir = false
   monochromeImages = false           # true = gambar di tulisan tampil grayscale
 
   # Link sosial (tampil di halaman Contact & footer). Tambah/hapus sesuka hati.
-  # floating = true → tampil sebagai tombol bulat di pojok kanan bawah (bukan di footer).
+  # floating = true → jadi tujuan tombol kontak bulat di pojok kanan bawah (dan tidak tampil di footer).
   [[params.social]]
     name = "Telegram"
     url = "https://t.me/magdoarch"

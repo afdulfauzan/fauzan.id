@@ -8,7 +8,7 @@ Blog pribadi yang dibangun dengan [Hugo](https://gohugo.io/). Temanya monochrome
 - Mobile-first, dengan light mode & dark mode. Default mengikuti setting perangkat, bisa diganti manual, dan pilihannya tersimpan
 - Dua bahasa: English di `/` (bahasa utama), Indonesia di `/id/`
 - Halaman: Beranda, Blog (dengan pagination), Post, Tag, Kontak (tidak tampil di menu), 404
-- Tombol Telegram bulat di pojok kanan bawah: link sosial yang diberi `floating = true` di `hugo.toml`
+- Tombol kontak bulat (ikon chat) di pojok kanan bawah, mengarah ke link sosial yang diberi `floating = true` di `hugo.toml` (sekarang Telegram)
 - Gambar otomatis di-resize, dikonversi ke WebP, dan di-lazy-load
 - SEO: meta description, Open Graph & Twitter card, hreflang, JSON-LD, sitemap, robots.txt, RSS per bahasa
 - Font self-hosted: Inter & JetBrains Mono (lisensi SIL OFL, lihat `static/fonts/`)

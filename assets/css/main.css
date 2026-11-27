@@ -1135,7 +1135,7 @@ a {
   color: var(--bg);
 }
 
-/* ---------- Floating button (bottom-right, e.g. Telegram) ----------
+/* ---------- Floating contact button (bottom-right) ----------
    Sticky rather than fixed: it floats in the corner while you scroll and
    stops just above the footer, so it never covers the footer links.
    It sits between <main> and the footer; <body> is a flex column. */
@@ -1159,12 +1159,9 @@ a {
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 .fab svg {
-  width: 100%;
-  height: 100%;
+  width: 1.75rem;
+  height: 1.75rem;
   fill: currentColor;
-}
-.fab-letter {
-  font: 700 1.25rem / 1 var(--font-mono);
 }
 .fab:hover {
   background: var(--bg);
