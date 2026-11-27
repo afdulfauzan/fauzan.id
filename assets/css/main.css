@@ -1634,6 +1634,10 @@ a {
 .footer-inner p {
   margin: 0;
 }
+/* the date stays in one piece if the line has to wrap on very small screens */
+.footer-inner .nowrap {
+  white-space: nowrap;
+}
 .footer-links {
   display: flex;
   flex-wrap: wrap;

@@ -1,12 +1,9 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <div class="footer-meta">
-      <p>© {{ now.Year }} {{ site.Params.author }}</p>
-      {{- /* when the deployed commit was made (the deploy workflow sets params.lastupdate); local builds use the build date */}}
-      {{- $updated := now }}
-      {{- with site.Params.lastupdate }}{{ $updated = time.AsTime . }}{{ end }}
-      <p>{{ T "last_update" }}: <time datetime="{{ $updated.Format "2006-01-02" }}">{{ $updated.Format "02/01/2006" }}</time></p>
-    </div>
+    {{- /* "Last update": when the deployed commit was made (the deploy workflow sets params.lastupdate); local builds use the build date */}}
+    {{- $updated := now }}
+    {{- with site.Params.lastupdate }}{{ $updated = time.AsTime . }}{{ end }}
+    <p>© {{ now.Year }} {{ site.Params.author }} <span aria-hidden="true">·</span> <span class="nowrap">{{ T "last_update" }}: <time datetime="{{ $updated.Format "2006-01-02" }}">{{ $updated.Format "02/01/2006" }}</time></span></p>
     {{- with where site.Params.social "footer" true }}
     <ul class="footer-links">
       {{- range . }}
