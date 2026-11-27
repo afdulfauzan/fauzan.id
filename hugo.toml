@@ -9,8 +9,8 @@ timeZone = "Asia/Jakarta"
 enableRobotsTXT = true
 capitalizeListTitles = false         # tag tetap huruf kecil: #hugo, bukan #Hugo
 
-# Bahasa utama = Indonesia (di root: fauzan.id/), English di fauzan.id/en/
-defaultContentLanguage = "id"
+# Bahasa utama = English (di root: fauzan.id/), Indonesia di fauzan.id/id/
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
 [pagination]
@@ -67,29 +67,10 @@ defaultContentLanguageInSubdir = false
 #  Bahasa
 # ---------------------------------------------------------------------
 [languages]
-  [languages.id]
-    label = "Bahasa Indonesia"
-    locale = "id-ID"
-    weight = 1
-    [languages.id.params]
-      description = "Blog pribadi Fauzan: catatan seputar teknologi, web, dan hal-hal yang sedang dipelajari."  # GANTI
-    [[languages.id.menus.main]]
-      name = "Beranda"
-      pageRef = "/"
-      weight = 10
-    [[languages.id.menus.main]]
-      name = "Blog"
-      pageRef = "/blog"
-      weight = 20
-    [[languages.id.menus.main]]
-      name = "Kontak"
-      pageRef = "/contact"
-      weight = 30
-
   [languages.en]
     label = "English"
     locale = "en-US"
-    weight = 2
+    weight = 1
     [languages.en.params]
       description = "Fauzan's personal blog: notes on technology, the web, and things I'm learning."  # GANTI
     [[languages.en.menus.main]]
@@ -102,5 +83,24 @@ defaultContentLanguageInSubdir = false
       weight = 20
     [[languages.en.menus.main]]
       name = "Contact"
+      pageRef = "/contact"
+      weight = 30
+
+  [languages.id]
+    label = "Bahasa Indonesia"
+    locale = "id-ID"
+    weight = 2
+    [languages.id.params]
+      description = "Blog pribadi Fauzan: catatan seputar teknologi, web, dan hal-hal yang sedang dipelajari."  # GANTI
+    [[languages.id.menus.main]]
+      name = "Beranda"
+      pageRef = "/"
+      weight = 10
+    [[languages.id.menus.main]]
+      name = "Blog"
+      pageRef = "/blog"
+      weight = 20
+    [[languages.id.menus.main]]
+      name = "Kontak"
       pageRef = "/contact"
       weight = 30

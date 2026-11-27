@@ -1,12 +1,12 @@
 # fauzan.id
 
-Blog pribadi yang dibangun dengan [Hugo](https://gohugo.io/). Temanya monochrome (hitam-putih) dan dibuat sendiri, kontennya dua bahasa (ID/EN), dan situsnya ter-deploy otomatis ke GitHub Pages.
+Blog pribadi yang dibangun dengan [Hugo](https://gohugo.io/). Temanya monochrome (hitam-putih) dan dibuat sendiri, kontennya dua bahasa (EN/ID), dan situsnya ter-deploy otomatis ke GitHub Pages.
 
 ## Fitur
 
 - Tema custom tanpa dependency: CSS murni + ±1 KB JavaScript untuk tombol dark mode
 - Mobile-first, dengan light mode & dark mode. Default mengikuti setting perangkat, bisa diganti manual, dan pilihannya tersimpan
-- Dua bahasa: Indonesia di `/`, English di `/en/`
+- Dua bahasa: English di `/` (bahasa utama), Indonesia di `/id/`
 - Halaman: Beranda, Blog (dengan pagination), Post, Tag, Kontak, 404
 - Gambar otomatis di-resize, dikonversi ke WebP, dan di-lazy-load
 - SEO: meta description, Open Graph & Twitter card, hreflang, JSON-LD, sitemap, robots.txt, RSS per bahasa
@@ -26,15 +26,17 @@ Setiap tulisan disimpan dalam satu folder di `content/blog/`:
 
 ```text
 content/blog/judul-tulisan/
-├── index.id.md   ← versi Indonesia
-├── index.en.md   ← versi English (opsional)
+├── index.en.md   ← versi English (bahasa utama)
+├── index.id.md   ← versi Indonesia (opsional)
 └── foto.jpg      ← gambar, dipakai bersama oleh kedua bahasa
 ```
 
 ```bash
-hugo new content blog/judul-tulisan/index.id.md
 hugo new content blog/judul-tulisan/index.en.md
+hugo new content blog/judul-tulisan/index.id.md
 ```
+
+File tanpa kode bahasa (misalnya `index.md`) dianggap versi English.
 
 Front matter:
 
@@ -45,7 +47,7 @@ date: 2026-11-27T10:00:00+07:00
 draft: false            # true = belum tampil di situs
 description: "Ringkasan 1–2 kalimat (tampil di daftar tulisan & preview saat dibagikan)"
 tags: ["hugo", "catatan"]
-slug: "judul-lain"      # opsional: URL khusus, misalnya untuk versi English
+slug: "judul-lain"      # opsional: URL khusus, misalnya untuk versi Indonesia
 cover: "foto.jpg"       # opsional: gambar preview saat link dibagikan
 ---
 ```
@@ -61,8 +63,8 @@ Catatan:
 ## Mengganti data pribadi
 
 - `hugo.toml`: nama, email, link sosial, dan deskripsi situs (cari tanda `# GANTI`)
-- `content/_index.id.md` & `content/_index.en.md`: sapaan & tagline di beranda
-- `content/contact.id.md` & `content/contact.en.md`: teks halaman kontak
+- `content/_index.en.md` & `content/_index.id.md`: sapaan & tagline di beranda
+- `content/contact.en.md` & `content/contact.id.md`: teks halaman kontak
 - `static/og.png`: gambar default saat link dibagikan (1200×630)
 
 ## Deploy
@@ -97,7 +99,7 @@ Sebelum custom domain aktif, situs bisa diakses di `https://afdulfauzan.github.i
 archetypes/                  template untuk `hugo new`
 assets/css/main.css          seluruh tampilan (warna, font, layout)
 assets/js/theme.js           tombol light/dark
-content/                     tulisan & halaman (ID: *.id.md, EN: *.en.md)
+content/                     tulisan & halaman (EN: *.en.md, ID: *.id.md)
 i18n/                        teks antarmuka per bahasa
 layouts/                     template HTML
 static/                      favicon, gambar share, font
