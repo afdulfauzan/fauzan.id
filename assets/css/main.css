@@ -395,6 +395,7 @@ a {
 
 /* ---------- Home ---------- */
 .hero {
+  container-type: inline-size; /* lets the typed heading size itself to the column */
   padding-block: clamp(3rem, 2rem + 6vw, 6.5rem) clamp(2.5rem, 2rem + 3vw, 4rem);
 }
 .hero-title {
@@ -405,6 +406,56 @@ a {
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
+/* Typing animation for a short home heading (see layouts/home.html), in mono.
+   Every monospace character is the same width, so steps(n) reveals exactly
+   one character per step while the caret moves along with it. The real text
+   is in the page from the start (screen readers, search engines, no JS needed). */
+.typing {
+  --track: -0.02em;
+  --step: calc(1ch + var(--track));      /* width of one character */
+  --type-delay: 0.35s;
+  --type-time: calc(var(--n) * 0.09s);   /* 90 ms per character */
+  font-family: var(--font-mono);
+  /* as big as --text-3xl, but small enough that the line never wraps */
+  font-size: min(var(--text-3xl), 100cqi / (var(--n) * 0.6 + 0.8));
+  line-height: 1.1;
+  letter-spacing: var(--track);
+  white-space: nowrap;
+}
+.typed {
+  display: inline-block;
+  animation: type var(--type-time) steps(var(--n)) var(--type-delay) backwards;
+}
+.caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.78em;
+  margin-left: 0.12em;
+  vertical-align: -0.06em;
+  background: currentColor;
+  animation:
+    caret-move var(--type-time) steps(var(--n)) var(--type-delay) backwards,
+    blink 1s step-end calc(var(--type-delay) + var(--type-time)) 3; /* stops after 3 s (WCAG 2.2.2) */
+}
+@keyframes type {
+  from {
+    clip-path: inset(-0.5em 100% -0.5em 0);
+  }
+  to {
+    clip-path: inset(-0.5em 0 -0.5em 0);
+  }
+}
+@keyframes caret-move {
+  from {
+    transform: translateX(calc(var(--n) * -1 * var(--step)));
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .hero-text {
   max-width: 34em;
   margin-top: 1.25rem;
@@ -1109,6 +1160,10 @@ a {
     transition-duration: 0s !important;
     animation-duration: 0s !important;
   }
+  .typed,
+  .caret {
+    animation: none; /* show the full heading right away */
+  }
 }
 
 @media print {
@@ -1123,6 +1178,7 @@ a {
   .nav,
   .tools,
   .skip,
+  .caret,
   .post-nav,
   .site-footer {
     display: none;

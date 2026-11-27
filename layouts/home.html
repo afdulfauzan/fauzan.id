@@ -1,6 +1,13 @@
 {{ define "main" }}
 <section class="wrap hero">
-  <h1 class="hero-title">{{ .Params.heading | default site.Title }}</h1>
+  {{- $heading := .Params.heading | default site.Title }}
+  {{- $n := strings.RuneCount $heading }}
+  {{- /* Short headings get the typing animation (one line only); long ones stay static and may wrap. */}}
+  {{- if le $n 20 }}
+  <h1 class="hero-title typing" style="--n: {{ $n }}"><span class="typed">{{ $heading }}</span><span class="caret" aria-hidden="true"></span></h1>
+  {{- else }}
+  <h1 class="hero-title">{{ $heading }}</h1>
+  {{- end }}
   {{- with .Content }}
   <div class="hero-text">{{ . }}</div>
   {{- end }}
