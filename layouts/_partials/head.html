@@ -8,8 +8,13 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="preload" href="{{ "fonts/inter-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ "fonts/jetbrains-mono-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
-{{- with resources.Get "css/main.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{- /* The stylesheet is inlined: the page can paint without waiting for a second request
+     (about 7 KB gzipped, so the HTML still fits in the first round trip). A separate file
+     would save little on GitHub Pages, which lets browsers cache files for only 10 minutes.
+     The font URLs in main.css are relative to css/, so point them at the site root here;
+     they then match the preload links above exactly. */}}
+{{- with resources.Get "css/main.css" | minify }}
+<style>{{ replace .Content "../fonts/" ("fonts/" | relURL) | safeCSS }}</style>
 {{- end }}
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
 <link rel="icon" href="{{ "favicon-32.png" | relURL }}" type="image/png" sizes="32x32">
