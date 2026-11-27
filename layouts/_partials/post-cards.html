@@ -1,36 +1,18 @@
 {{- /*
-  Note cards (home page "Latest notes"). Params: pages (Pages), level (heading level, default 3).
-  The cover comes from front matter `cover` (an image in the note's folder); notes without one
-  get their first letter instead. The title link covers the whole card.
+  Note cards (home page "Latest notes"): title, date and reading time, summary.
+  Params: pages (Pages), level (heading level, default 3). The title link covers the whole card.
 */ -}}
 {{- $level := .level | default 3 -}}
 <ol class="cards">
-  {{- range $i, $p := .pages }}
+  {{- range .pages }}
   <li class="card">
-    <div class="card-media" aria-hidden="true">
-      {{- $img := false }}
-      {{- with $p.Params.cover }}
-        {{- with $p.Resources.Get . }}
-          {{- if in (slice "jpeg" "png" "webp") .MediaType.SubType }}{{ $img = . }}{{ end }}
-        {{- end }}
-      {{- end }}
-      {{- with $img }}
-        {{- $lg := .Fill "720x378 Center webp q80" }}
-        {{- $sm := .Fill "360x189 Center webp q80" }}
-      <img src="{{ $lg.RelPermalink }}" srcset="{{ $sm.RelPermalink }} 360w, {{ $lg.RelPermalink }} 720w" sizes="(min-width: 46rem) 20.5rem, (min-width: 40rem) 46vw, 100vw" width="{{ $lg.Width }}" height="{{ $lg.Height }}" alt=""{{ if ge $i 2 }} loading="lazy"{{ end }} decoding="async">
-      {{- else }}
-      <span class="card-initial">{{ substr $p.LinkTitle 0 1 }}</span>
-      {{- end }}
-    </div>
-    <div class="card-body">
-      <h{{ $level }} class="card-title"><a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a></h{{ $level }}>
-      {{ partial "post-meta.html" (dict "page" $p) }}
-      {{- $text := $p.Description }}
-      {{- if not $text }}{{ $text = $p.Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}
-      {{- with $text }}
-      <p class="card-summary">{{ . }}</p>
-      {{- end }}
-    </div>
+    <h{{ $level }} class="card-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h{{ $level }}>
+    {{ partial "post-meta.html" (dict "page" .) }}
+    {{- $text := .Description }}
+    {{- if not $text }}{{ $text = .Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}
+    {{- with $text }}
+    <p class="card-summary">{{ . }}</p>
+    {{- end }}
   </li>
   {{- end }}
 </ol>
