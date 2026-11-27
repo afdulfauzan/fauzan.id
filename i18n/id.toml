@@ -31,6 +31,7 @@ copied = "Disalin"
 copy_failed = "Gagal"
 image_full = "Lihat ukuran penuh"
 close = "Tutup"
+last_update = "Terakhir diperbarui"
 
 search_label = "Cari catatan"
 search_placeholder = "Cari catatan…"

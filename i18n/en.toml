@@ -30,6 +30,7 @@ copied = "Copied"
 copy_failed = "Failed"
 image_full = "View full size"
 close = "Close"
+last_update = "Last update"
 
 search_label = "Search notes"
 search_placeholder = "Search notes…"

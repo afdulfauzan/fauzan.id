@@ -55,6 +55,9 @@ jobs:
           # is issued; always build https:// links.
           base_url="${PAGES_BASE_URL/#http:\/\//https://}/"
           echo "Base URL: ${base_url}"
+          # "Last update" in the footer: when the deployed commit was made, in local time (TZ above)
+          export HUGO_PARAMS_LASTUPDATE="$(git log -1 --format=%cd --date=format-local:%Y-%m-%dT%H:%M:%S)"
+          echo "Last update: ${HUGO_PARAMS_LASTUPDATE}"
           hugo version
           hugo build --gc --minify --baseURL "${base_url}"
 
