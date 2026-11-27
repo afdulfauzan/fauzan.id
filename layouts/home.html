@@ -16,8 +16,9 @@
 <section class="wrap block" aria-labelledby="latest-posts">
   <h2 class="label" id="latest-posts">{{ T "latest_posts" }}</h2>
   {{- $posts := where site.RegularPages "Section" "notes" }}
-  {{- with first 5 $posts }}
-    {{ partial "post-list.html" (dict "pages" . "level" 3) }}
+  {{- /* 4 = an even 2×2 grid of cards on wider screens */}}
+  {{- with first 4 $posts }}
+    {{ partial "post-cards.html" (dict "pages" . "level" 3) }}
   {{- else }}
   <p class="empty">{{ T "no_posts" }}</p>
   {{- end }}
