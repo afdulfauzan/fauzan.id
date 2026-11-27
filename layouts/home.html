@@ -2,11 +2,19 @@
 <section class="wrap hero">
   {{- $heading := .Params.heading | default site.Title }}
   {{- $n := strings.RuneCount $heading }}
+  {{- $typing := le $n 20 }}
+  {{- /* The terminal (front matter "terminal") starts when the heading is done:
+       0.35 s + 90 ms a character (see .typing in main.css), then a short pause. */}}
+  {{- $term := .Params.terminal }}
+  {{- $handoff := cond $typing (add 350 (mul $n 90) 400) 300 }}
   {{- /* Short headings get the typing animation (one line only); long ones stay static and may wrap. */}}
-  {{- if le $n 20 }}
-  <h1 class="hero-title typing" style="--n: {{ $n }}"><span class="typed">{{ $heading }}</span><span class="caret" aria-hidden="true"></span></h1>
+  {{- if $typing }}
+  <h1 class="hero-title typing" style="--n: {{ $n }}{{ with $term }}; --handoff: {{ $handoff }}ms{{ end }}"><span class="typed">{{ $heading }}</span><span class="caret{{ with $term }} caret-handoff{{ end }}" aria-hidden="true"></span></h1>
   {{- else }}
   <h1 class="hero-title">{{ $heading }}</h1>
+  {{- end }}
+  {{- with $term }}
+  {{ partial "terminal.html" (dict "term" . "start" $handoff) }}
   {{- end }}
   {{- with .Content }}
   <div class="hero-text">{{ . }}</div>

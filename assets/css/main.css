@@ -487,6 +487,141 @@ a {
   color: var(--fg);
 }
 
+/* Terminal window under the heading (front matter "terminal" in content/_index.*.md,
+   markup in layouts/_partials/terminal.html). Once the heading has typed itself,
+   the cursor moves down here, types each command, and the output appears after
+   "Enter". All the text is in the page from the start: covers (::after, in the
+   terminal's background colour) hide what hasn't happened yet, so nothing moves
+   or reflows. With reduced motion everything shows at once. */
+.term {
+  --term-bg: var(--bg);
+  margin-top: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+  border: 1px solid var(--fg);
+  background: var(--term-bg);
+  font-family: var(--font-mono);
+}
+.term-bar {
+  display: grid;
+  /* title centred on the whole bar; on a narrow bar it moves left, never under the buttons */
+  grid-template-columns: minmax(0, 1fr) auto minmax(max-content, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.5rem;
+  padding-inline: 1rem;
+  border-bottom: 1px solid var(--fg);
+  font-size: var(--text-xs);
+  line-height: 1.2;
+}
+.term-title {
+  grid-column: 2;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.term-ctrl {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: clamp(0.875rem, 0.6rem + 1.2vw, 1.125rem);
+}
+.term-ctrl svg {
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.term-body {
+  padding: 0.875rem 1rem 1.125rem;
+  overflow: hidden; /* clips the cover that runs past the end of a command */
+  font-size: clamp(0.8125rem, 0.76rem + 0.25vw, 0.9375rem);
+  line-height: 1.75;
+}
+.term-line,
+.term-out {
+  position: relative;
+  white-space: pre-wrap;
+}
+.term-out p {
+  margin: 0;
+}
+.term-out strong {
+  display: inline-block; /* wraps to its own line in one piece when the line is too narrow */
+  font-weight: 700;
+}
+.term-ps1 {
+  color: var(--muted);
+}
+.term-cmd {
+  position: relative;
+  font: inherit;
+}
+/* the cursor on the last prompt: one character wide, as tall as the text */
+.term-cursor {
+  display: inline-block;
+  width: 1ch;
+  height: 1.32em;
+  vertical-align: -0.3em;
+  background: var(--fg);
+  animation: blink 1s step-end var(--show) 3; /* then stays (WCAG 2.2.2) */
+}
+/* covers a line until its time (--show) */
+.term-line::after,
+.term-out::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--term-bg);
+  pointer-events: none;
+  visibility: hidden;
+  animation: term-until 0s var(--show) backwards;
+}
+/* typing: a cover over the command whose left edge is the block cursor. From --on
+   the cursor shows, from --at it moves right one character per step, and at
+   --enter the cover goes away. */
+.term-cmd::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc((var(--n) + 1) * 1ch);
+  background: var(--term-bg);
+  box-shadow: inset 1ch 0 var(--fg);
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateX(calc(var(--n) * 1ch));
+  animation:
+    term-type calc(var(--n) * 70ms) steps(var(--n)) var(--at) both,
+    term-no-cursor 0s var(--on) backwards,
+    term-until 0s var(--enter) backwards;
+}
+/* the heading's caret goes away when the terminal's cursor takes over */
+.caret-handoff {
+  visibility: hidden;
+  animation:
+    caret-move var(--type-time) steps(var(--n)) var(--type-delay) backwards,
+    blink 1s step-end calc(var(--type-delay) + var(--type-time)) 3,
+    term-until 0s var(--handoff) backwards;
+}
+@keyframes term-until {
+  from {
+    visibility: visible;
+  }
+}
+@keyframes term-no-cursor {
+  from {
+    box-shadow: none;
+  }
+}
+@keyframes term-type {
+  from {
+    transform: translateX(0);
+  }
+}
+
 .block {
   padding-bottom: clamp(3rem, 2rem + 4vw, 5rem);
 }
@@ -1666,8 +1801,12 @@ a {
     animation-duration: 0s !important;
   }
   .typed,
-  .caret {
-    animation: none; /* show the full heading right away */
+  .caret,
+  .term-cursor,
+  .term-line::after,
+  .term-out::after,
+  .term-cmd::after {
+    animation: none; /* show the full heading and terminal right away */
   }
 }
 
@@ -1684,6 +1823,7 @@ a {
   .tools,
   .skip,
   .caret,
+  .term-cursor,
   .toc,
   .read-bar,
   .code-copy,

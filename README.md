@@ -5,6 +5,7 @@ A minimal black-and-white Hugo theme for a personal site with notes, in English 
 Demo: https://afdulfauzan.github.io/fauzan.id/
 
 - Light and dark mode: follows the system setting, with a toggle
+- A terminal window on the home page that types out a command or two
 - Notes with tags, search, and a table of contents on long notes
 - Copy buttons on code blocks
 - Images open full screen when tapped
@@ -28,7 +29,7 @@ Hosting somewhere else? Set `baseURL` in `hugo.toml`, run `hugo build --minify`,
 | File | What to change |
 | ---- | -------------- |
 | `hugo.toml` | `title` (site name), `params.author` (your name), `params.email`, `params.social` (links), `timeZone`, and each language's `description` and menu |
-| `content/_index.*.md` | `heading`, the greeting on the home page (20 characters or fewer types itself out), and `description` |
+| `content/_index.*.md` | `heading`, the greeting on the home page (20 characters or fewer types itself out), `terminal`, the window under it, and `description` |
 | `content/contact.*.md` | The text on the Contact page |
 | `content/notes/` | Delete the sample notes. Keep `_index.*.md`: it holds the title and intro of the notes page. |
 | `layouts/_partials/logo.html` | Your logo as an inline SVG. Leave out fill colors so it follows light and dark mode. |
@@ -36,6 +37,17 @@ Hosting somewhere else? Set `baseURL` in `hugo.toml`, run `hugo build --minify`,
 | `i18n/` | Interface text for each language |
 
 A social link shows on the Contact page with `contact = true` and in the footer with `footer = true`. Set `monochromeImages = true` to show images in notes in grayscale.
+
+The terminal window starts once the greeting has finished typing. Each command types itself out and its output appears below it. `output` takes Markdown, so `**bold**` works. Delete the `terminal` block to remove the window.
+
+```yaml
+terminal:
+  title: "root@arch: ~"
+  prompt: "root@arch #"
+  commands:
+    - run: "whoami"
+      output: "Your Name - **Your Role**"
+```
 
 ## Writing notes
 
