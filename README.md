@@ -1,32 +1,32 @@
 # fauzan.id
 
-Situs pribadi fauzan.id, dibuat dengan [Hugo](https://gohugo.io/) dan di-hosting di GitHub Pages.
+Personal website, built with [Hugo](https://gohugo.io/) and hosted on GitHub Pages.
 
 ## Deploy
 
-Setiap push ke branch `main` otomatis di-build dan dipublikasikan oleh GitHub Actions (`.github/workflows/hugo.yml`). Prosesnya sekitar 1 menit, dan statusnya bisa dilihat di tab **Actions**.
+Every push to the `main` branch is built and published automatically by GitHub Actions (`.github/workflows/hugo.yml`). It takes about a minute, and you can follow it in the **Actions** tab.
 
 ```bash
 git add -A
-git commit -m "Tambah catatan baru"
+git commit -m "Add a new note"
 git push origin main
 ```
 
-- Catatan baru ditaruh di `content/notes/`.
-- Cek tampilan sebelum push (opsional): `hugo server`, lalu buka http://localhost:1313. Butuh Hugo v0.170.1 atau lebih baru; versi yang dipakai GitHub Actions dikunci lewat `HUGO_VERSION` di file workflow.
-- Deploy ulang tanpa perubahan: tab **Actions** → **Deploy to GitHub Pages** → **Run workflow**.
+- New notes go in `content/notes/`.
+- Preview before pushing (optional): run `hugo server`, then open http://localhost:1313. Needs Hugo v0.170.1 or newer; the version GitHub Actions uses is pinned by `HUGO_VERSION` in the workflow file.
+- Redeploy without any changes: **Actions** tab → **Deploy to GitHub Pages** → **Run workflow**.
 
-## Setup GitHub Pages (sekali saja)
+## GitHub Pages setup (one time)
 
-**Settings → Pages → Build and deployment → Source:** pilih **GitHub Actions**.
+**Settings → Pages → Build and deployment → Source:** choose **GitHub Actions**.
 
-Sebelum custom domain aktif, situs ada di https://afdulfauzan.github.io/fauzan.id/.
+Until the custom domain is active, the site is at https://afdulfauzan.github.io/fauzan.id/.
 
 ## Custom domain
 
-1. **Settings → Pages → Custom domain:** isi `fauzan.id`, lalu deploy ulang. Alamat di situs ikut menyesuaikan, jadi `hugo.toml` tidak perlu diubah.
-2. Kalau `fauzan.id` masih terpasang di layanan lain (misalnya Cloudflare Pages), lepas dulu dari sana.
-3. Isi DNS berikut. Di Cloudflare, set ke **DNS only** (awan abu-abu). Jangan ubah record MX dan TXT milik email.
+1. **Settings → Pages → Custom domain:** enter `fauzan.id`, then redeploy. Links on the site switch to the new address on their own, so `hugo.toml` doesn't need editing.
+2. If `fauzan.id` is still attached to another service (Cloudflare Pages, for example), remove it there first.
+3. Add the DNS records below. On Cloudflare, set them to **DNS only** (gray cloud). Leave the MX and TXT records used for email as they are.
 
    | Type  | Name  | Value                   |
    | ----- | ----- | ----------------------- |
@@ -40,4 +40,4 @@ Sebelum custom domain aktif, situs ada di https://afdulfauzan.github.io/fauzan.i
    | AAAA  | `@`   | `2606:50c0:8003::153`   |
    | CNAME | `www` | `afdulfauzan.github.io` |
 
-4. Setelah GitHub selesai menerbitkan sertifikat HTTPS, centang **Enforce HTTPS** di halaman yang sama.
+4. Once GitHub has issued the HTTPS certificate, tick **Enforce HTTPS** on the same page.
