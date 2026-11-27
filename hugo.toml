@@ -83,7 +83,7 @@ defaultContentLanguageInSubdir = false
     locale = "en-US"
     weight = 1
     [languages.en.params]
-      description = "Fauzan's personal blog: notes on technology, the web, and things I'm learning."  # GANTI
+      description = "Notes by Afdul Fauzan, IT Support and System Administrator: Linux and everyday IT."  # GANTI
     [[languages.en.menus.main]]
       name = "Home"
       pageRef = "/"
@@ -102,7 +102,7 @@ defaultContentLanguageInSubdir = false
     locale = "id-ID"
     weight = 2
     [languages.id.params]
-      description = "Blog pribadi Fauzan: catatan seputar teknologi, web, dan hal-hal yang sedang dipelajari."  # GANTI
+      description = "Catatan Afdul Fauzan, IT Support dan System Administrator: Linux dan urusan IT sehari-hari."  # GANTI
     [[languages.id.menus.main]]
       name = "Beranda"
       pageRef = "/"

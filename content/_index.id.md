@@ -1,7 +1,7 @@
 ---
 title: "Beranda"
 heading: "Halo Dunia!"
-description: "Blog pribadi Fauzan: catatan seputar teknologi, web, dan hal-hal yang sedang dipelajari."
+description: "Catatan Afdul Fauzan, IT Support dan System Administrator: Linux dan urusan IT sehari-hari."
 terminal:
   title: "root@arch: ~"
   prompt: "root@arch #"

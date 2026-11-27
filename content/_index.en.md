@@ -1,7 +1,7 @@
 ---
 title: "Home"
 heading: "Hello World!"
-description: "Fauzan's personal blog: notes on technology, the web, and things I'm learning."
+description: "Notes by Afdul Fauzan, IT Support and System Administrator: Linux and everyday IT."
 terminal:
   title: "root@arch: ~"
   prompt: "root@arch #"
