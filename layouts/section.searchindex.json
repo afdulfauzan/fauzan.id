@@ -1,0 +1,19 @@
+{{- /* Search index for this section's posts, loaded by assets/js/search.js on the first search. */ -}}
+{{- $items := slice -}}
+{{- range .RegularPages -}}
+  {{- $summary := .Description -}}
+  {{- if not $summary }}{{ $summary = .Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end -}}
+  {{- $tags := slice -}}
+  {{- range .GetTerms "tags" }}{{ $tags = $tags | append (dict "name" .LinkTitle "url" .RelPermalink) }}{{ end -}}
+  {{- $items = $items | append (dict
+      "title" .LinkTitle
+      "url" .RelPermalink
+      "datetime" (.Date.Format "2006-01-02")
+      "date" (.Date | time.Format ":date_medium")
+      "reading" (T "reading_time" .ReadingTime)
+      "summary" $summary
+      "tags" $tags
+      "content" (.Content | replaceRE `<a class="anchor"[^>]*>#</a>` "" | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace)
+  ) -}}
+{{- end -}}
+{{- $items | jsonify -}}

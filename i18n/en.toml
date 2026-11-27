@@ -23,6 +23,13 @@ tagged = "Posts tagged"
 contact_links = "Contact and links"
 chat_on = "Chat on {{ .Name }}"
 
+search_label = "Search posts"
+search_placeholder = "Search posts…"
+search_result_one = "1 post found for “{q}”"
+search_result_other = "{n} posts found for “{q}”"
+search_none = "No posts found for “{q}”."
+search_error = "Search couldn't load. Please try again."
+
 not_found_title = "Page not found"
 not_found_text = "The page you're looking for doesn't exist or has moved."
 back_home = "Back to home"

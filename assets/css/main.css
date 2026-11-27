@@ -144,6 +144,18 @@ a {
   padding-inline: var(--gutter);
 }
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .skip {
   position: absolute;
   top: -100px;
@@ -466,7 +478,7 @@ a {
   padding: 0;
   list-style: none;
 }
-.page-head + .wrap > .post-list {
+.page-head + .wrap .post-list {
   border-top: 1px solid var(--fg);
 }
 
@@ -590,6 +602,77 @@ a {
 }
 .page-intro a {
   color: var(--fg);
+}
+
+/* ---------- Search (Blog page, needs JavaScript) ---------- */
+.search {
+  position: relative;
+  margin-top: 1.5rem;
+}
+:root:not([data-theme]) .search {
+  display: none; /* no JavaScript: hide the box (the theme script sets data-theme) */
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.875rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.search-input {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 0 0.875rem 0 2.75rem;
+  border: 1px solid var(--fg);
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1rem / 1.2 var(--font-mono); /* 16px+: iPhone doesn't zoom in on focus */
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.search-input:focus-visible {
+  outline-offset: 0;
+}
+.search-input::-webkit-search-cancel-button {
+  width: 1rem;
+  height: 1rem;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6 6 18' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6 6 18' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-status {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.search-status:not(:empty) {
+  margin-bottom: 1rem;
+}
+.search-results mark {
+  padding-inline: 0.1em;
+  background: var(--fg);
+  color: var(--bg);
+}
+@media (hover: hover) {
+  .search-results .post-item:hover mark {
+    background: var(--bg);
+    color: var(--fg);
+  }
 }
 
 /* ---------- Single post ---------- */

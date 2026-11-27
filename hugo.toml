@@ -22,9 +22,16 @@ defaultContentLanguageInSubdir = false
 [services.rss]
   limit = 20
 
+# Index pencarian per bahasa (/blog/search.json), dipakai kotak pencarian di halaman Blog
+[outputFormats.searchindex]
+  mediaType = "application/json"
+  baseName = "search"
+  isPlainText = true
+  notAlternative = true
+
 [outputs]
   home = ["html", "rss"]
-  section = ["html", "rss"]
+  section = ["html", "rss", "searchindex"]
   taxonomy = ["html"]
   term = ["html", "rss"]
   page = ["html"]

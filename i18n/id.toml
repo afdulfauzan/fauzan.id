@@ -24,6 +24,13 @@ tagged = "Tulisan dengan tag"
 contact_links = "Kontak dan tautan"
 chat_on = "Chat lewat {{ .Name }}"
 
+search_label = "Cari tulisan"
+search_placeholder = "Cari tulisan…"
+search_result_one = "1 tulisan ditemukan untuk “{q}”"
+search_result_other = "{n} tulisan ditemukan untuk “{q}”"
+search_none = "Tidak ada tulisan untuk “{q}”."
+search_error = "Pencarian gagal dimuat. Coba lagi nanti."
+
 not_found_title = "Halaman tidak ditemukan"
 not_found_text = "Halaman yang kamu cari tidak ada atau sudah dipindahkan."
 back_home = "Kembali ke beranda"

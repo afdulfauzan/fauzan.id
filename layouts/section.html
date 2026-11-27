@@ -4,15 +4,31 @@
   {{- with .Content }}
   <div class="page-intro">{{ . }}</div>
   {{- end }}
+  {{- with .OutputFormats.Get "searchindex" }}
+  <form class="search" role="search" data-search data-index="{{ .RelPermalink }}" data-msg-one="{{ T "search_result_one" }}" data-msg-other="{{ T "search_result_other" }}" data-msg-none="{{ T "search_none" }}" data-msg-error="{{ T "search_error" }}">
+    <label class="visually-hidden" for="search-q">{{ T "search_label" }}</label>
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input class="search-input" id="search-q" type="search" name="q" placeholder="{{ T "search_placeholder" }}" autocomplete="off" spellcheck="false" enterkeyhint="search">
+  </form>
+  {{- end }}
 </header>
 
 <div class="wrap block">
-  {{- $pager := .Paginator }}
-  {{- with $pager.Pages }}
-    {{ partial "post-list.html" (dict "pages" . "level" 2 "summary" true) }}
-  {{- else }}
-  <p class="empty">{{ T "no_posts" }}</p>
-  {{- end }}
-  {{ partial "pager.html" $pager }}
+  <p class="search-status" role="status" data-search-status></p>
+  <ol class="post-list search-results" data-search-results hidden></ol>
+  <div data-search-default>
+    {{- $pager := .Paginator }}
+    {{- with $pager.Pages }}
+      {{ partial "post-list.html" (dict "pages" . "level" 2 "summary" true) }}
+    {{- else }}
+    <p class="empty">{{ T "no_posts" }}</p>
+    {{- end }}
+    {{ partial "pager.html" $pager }}
+  </div>
 </div>
+{{- if .OutputFormats.Get "searchindex" }}
+  {{- with resources.Get "js/search.js" | minify | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+  {{- end }}
+{{- end }}
 {{ end }}
