@@ -46,10 +46,12 @@ defaultContentLanguageInSubdir = false
   monochromeImages = false           # true = gambar di tulisan tampil grayscale
 
   # Link sosial (tampil di halaman Contact & footer). Tambah/hapus sesuka hati.
+  # floating = true → tampil sebagai tombol bulat di pojok kanan bawah (bukan di footer).
   [[params.social]]
     name = "Telegram"
     url = "https://t.me/magdoarch"
     handle = "@magdoarch"
+    floating = true
   [[params.social]]
     name = "GitHub"
     url = "https://github.com/afdulfauzan"
@@ -81,10 +83,6 @@ defaultContentLanguageInSubdir = false
       name = "Blog"
       pageRef = "/blog"
       weight = 20
-    [[languages.en.menus.main]]
-      name = "Contact"
-      pageRef = "/contact"
-      weight = 30
 
   [languages.id]
     label = "Bahasa Indonesia"
@@ -100,7 +98,3 @@ defaultContentLanguageInSubdir = false
       name = "Blog"
       pageRef = "/blog"
       weight = 20
-    [[languages.id.menus.main]]
-      name = "Kontak"
-      pageRef = "/contact"
-      weight = 30

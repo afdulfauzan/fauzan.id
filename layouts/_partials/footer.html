@@ -6,7 +6,9 @@
       <li><a href="{{ .RelPermalink }}">RSS</a></li>
       {{- end }}
       {{- range site.Params.social }}
+        {{- if not .floating }}
       <li><a href="{{ .url }}" rel="me noopener">{{ .name }}</a></li>
+        {{- end }}
       {{- end }}
     </ul>
   </div>

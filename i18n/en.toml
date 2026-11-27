@@ -21,6 +21,7 @@ all_tags = "All tags"
 tagged = "Posts tagged"
 
 contact_links = "Contact and links"
+chat_on = "Chat on {{ .Name }}"
 
 not_found_title = "Page not found"
 not_found_text = "The page you're looking for doesn't exist or has moved."

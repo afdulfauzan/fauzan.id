@@ -22,6 +22,7 @@ all_tags = "Semua tag"
 tagged = "Tulisan dengan tag"
 
 contact_links = "Kontak dan tautan"
+chat_on = "Chat lewat {{ .Name }}"
 
 not_found_title = "Halaman tidak ditemukan"
 not_found_text = "Halaman yang kamu cari tidak ada atau sudah dipindahkan."
