@@ -4,7 +4,7 @@
 # =====================================================================
 
 baseURL = "https://fauzan.id/"
-title = "fauzan.id"
+title = "Afdul Fauzan"
 timeZone = "Asia/Jakarta"
 enableRobotsTXT = true
 capitalizeListTitles = false         # tag tetap huruf kecil: #hugo, bukan #Hugo
