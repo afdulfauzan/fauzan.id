@@ -14,8 +14,11 @@
     {{- end }}
   </header>
 
-  <div class="prose{{ if site.Params.monochromeImages }} mono-img{{ end }}">
-    {{ .Content }}
+  <div class="post-body">
+    {{- if $isPost }}{{ partial "toc.html" . }}{{ end }}
+    <div class="prose{{ if site.Params.monochromeImages }} mono-img{{ end }}">
+      {{ .Content }}
+    </div>
   </div>
 
   {{- if $isPost }}

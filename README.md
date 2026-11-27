@@ -8,6 +8,7 @@ Blog pribadi yang dibangun dengan [Hugo](https://gohugo.io/). Temanya monochrome
 - Mobile-first, dengan light mode & dark mode. Default mengikuti setting perangkat, bisa diganti manual, dan pilihannya tersimpan
 - Dua bahasa: English di `/` (bahasa utama), Indonesia di `/id/`
 - Halaman: Beranda, Blog (dengan pagination), Post, Tag, Kontak (tidak tampil di menu), 404
+- Daftar isi mengambang di tulisan panjang (3+ subjudul): di samping artikel pada layar lebar, tombol bulat di HP/tablet
 - Pencarian di halaman Blog tanpa server: Hugo membuat `search.json` per bahasa, lalu judul, tag, ringkasan, dan isi tulisan dicari langsung di browser (`assets/js/search.js`)
 - Tombol kontak bulat (ikon chat) di pojok kanan bawah, mengarah ke link sosial yang diberi `floating = true` di `hugo.toml` (sekarang Telegram)
 - Gambar otomatis di-resize, dikonversi ke WebP, dan di-lazy-load
@@ -51,6 +52,7 @@ description: "Ringkasan 1–2 kalimat (tampil di daftar tulisan & preview saat d
 tags: ["hugo", "catatan"]
 slug: "judul-lain"      # opsional: URL khusus, misalnya untuk versi Indonesia
 cover: "foto.jpg"       # opsional: gambar preview saat link dibagikan
+toc: false              # opsional: sembunyikan daftar isi (otomatis muncul kalau ada 3+ subjudul ## / ###)
 ---
 ```
 

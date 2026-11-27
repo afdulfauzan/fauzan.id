@@ -780,6 +780,135 @@ a {
   }
 }
 
+/* ---------- Table of contents (long posts, see layouts/_partials/toc.html) ----------
+   Wide screens: sticky sidebar to the right of the post.
+   Smaller screens: a round button above the contact button opens it as a panel.
+   Without JavaScript on smaller screens: a plain box above the post. */
+.toc {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+}
+.toc-title {
+  margin: 0 0 0.625rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.toc-inner > ul {
+  border-left: 1px solid var(--line);
+}
+.toc a {
+  display: block;
+  margin-left: -1px; /* the active bar sits on the grey rail */
+  padding: 0.3125rem 0 0.3125rem 0.875rem;
+  border-left: 2px solid transparent;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  text-decoration: none;
+}
+.toc ul ul a {
+  padding-left: 1.75rem; /* h3 entries */
+}
+.toc a:hover {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.toc a[aria-current] {
+  border-left-color: var(--fg);
+  color: var(--fg);
+  font-weight: 600;
+}
+.toc-toggle {
+  display: none;
+}
+
+@media (max-width: 74.99rem) {
+  :root[data-theme] .toc {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 8.5rem); /* above both round buttons */
+    z-index: 45;
+    display: none;
+    width: min(20rem, calc(100vw - 2rem));
+    max-height: calc(100vh - var(--header-h) - 10rem);
+    max-height: calc(100dvh - var(--header-h) - 10rem);
+    margin: 0;
+    padding: 1rem 1rem 0.75rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--fg);
+    background: var(--bg);
+    box-shadow: 0 0 0 2px var(--bg);
+  }
+  :root[data-theme] .toc.is-open {
+    display: block;
+  }
+  :root[data-theme] .toc-toggle {
+    position: fixed;
+    right: calc(max(1rem, env(safe-area-inset-right)) + 0.25rem); /* centred above the 56px contact button */
+    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 4.25rem);
+    z-index: 45;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 1px solid var(--fg);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--fg);
+    box-shadow: 0 0 0 2px var(--bg);
+    cursor: pointer;
+    transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+  :root[data-theme] .toc-toggle svg {
+    width: 1.375rem;
+    height: 1.375rem;
+    fill: currentColor;
+  }
+  :root[data-theme] .toc-toggle:hover,
+  :root[data-theme] .toc-toggle[aria-expanded="true"] {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  :root[data-theme] .toc-toggle[data-away] {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@media (min-width: 75rem) {
+  .post-body {
+    position: relative;
+  }
+  .toc {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(100% + var(--gutter) + 1.5rem);
+    width: min(15rem, calc((100vw - var(--measure)) / 2 - var(--gutter) - 3rem));
+    margin: 0;
+    padding: 2.25rem 0 0;
+    border: 0;
+  }
+  .toc-inner {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+    max-height: calc(100vh - var(--header-h) - 4rem);
+    overflow-y: auto;
+  }
+}
+
 /* ---------- Prose (post & page content) ---------- */
 .prose {
   padding-block: 2rem clamp(3rem, 2rem + 4vw, 5rem);
@@ -1280,6 +1409,8 @@ a {
   .skip,
   .caret,
   .fab,
+  .toc,
+  .toc-toggle,
   .post-nav,
   .site-footer {
     display: none;

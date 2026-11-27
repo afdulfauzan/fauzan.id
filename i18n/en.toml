@@ -23,6 +23,9 @@ tagged = "Posts tagged"
 contact_links = "Contact and links"
 chat_on = "Chat on {{ .Name }}"
 
+toc_title = "On this page"
+toc_toggle = "Table of contents"
+
 search_label = "Search posts"
 search_placeholder = "Search posts…"
 search_result_one = "1 post found for “{q}”"
