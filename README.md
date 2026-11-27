@@ -2,7 +2,7 @@
 
 A minimal black-and-white Hugo theme for a personal site with notes, in English and Indonesian.
 
-Demo: https://afdulfauzan.github.io/fauzan.id/
+Demo: https://fauzan.id/
 
 - Light and dark mode: follows the system setting, with a toggle
 - A terminal window on the home page that types out a command or two
