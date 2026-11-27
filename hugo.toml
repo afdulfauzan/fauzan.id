@@ -14,7 +14,7 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
 [pagination]
-  pagerSize = 10                     # jumlah tulisan per halaman di /blog/
+  pagerSize = 10                     # jumlah catatan per halaman di /notes/ (ID: /id/catatan/)
 
 [taxonomies]
   tag = "tags"                       # hanya pakai tag (tanpa kategori)
@@ -22,7 +22,7 @@ defaultContentLanguageInSubdir = false
 [services.rss]
   limit = 20
 
-# Index pencarian per bahasa (/blog/search.json), dipakai kotak pencarian di halaman Blog
+# Index pencarian per bahasa (/notes/search.json & /id/catatan/search.json), dipakai kotak pencarian di halaman Notes/Catatan
 [outputFormats.searchindex]
   mediaType = "application/json"
   baseName = "search"
@@ -87,8 +87,8 @@ defaultContentLanguageInSubdir = false
       pageRef = "/"
       weight = 10
     [[languages.en.menus.main]]
-      name = "Blog"
-      pageRef = "/blog"
+      name = "Notes"
+      pageRef = "/notes"
       weight = 20
 
   [languages.id]
@@ -102,6 +102,11 @@ defaultContentLanguageInSubdir = false
       pageRef = "/"
       weight = 10
     [[languages.id.menus.main]]
-      name = "Blog"
-      pageRef = "/blog"
+      name = "Catatan"
+      pageRef = "/notes"
       weight = 20
+    # Catatan versi Indonesia beralamat /id/catatan/… (foldernya tetap content/notes/)
+    [languages.id.permalinks.section]
+      notes = "/catatan/"
+    [languages.id.permalinks.page]
+      notes = "/catatan/:slugorcontentbasename/"

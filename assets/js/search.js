@@ -1,4 +1,4 @@
-// Blog search. Hugo writes this section's posts to search.json
+// Search on the Notes page. Hugo writes this section's posts to search.json
 // (layouts/section.searchindex.json); it is fetched on first use and searched
 // in the browser: title, tags, summary and full text. No dependencies.
 (() => {

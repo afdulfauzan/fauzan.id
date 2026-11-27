@@ -1,6 +1,7 @@
 ---
 title: "Hello, World"
 slug: "hello-world"
+aliases: ["/blog/hello-world/"]  # old address
 date: 2026-11-25T09:00:00+07:00
 description: "The first post on fauzan.id: what this blog is about and what I'll be writing here."
 tags: ["notes"]

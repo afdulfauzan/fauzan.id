@@ -1,10 +1,10 @@
 {{ define "main" }}
-{{- $isPost := eq .Section "blog" }}
+{{- $isPost := eq .Section "notes" }}
 <article class="wrap post">
   <header class="post-head">
     {{- if $isPost }}
       {{- with .Parent }}
-    <a class="back" href="{{ .RelPermalink }}"><span aria-hidden="true">←</span> {{ T "back_to_blog" }}</a>
+    <a class="back" href="{{ .RelPermalink }}"><span aria-hidden="true">←</span> {{ .LinkTitle }}</a>
       {{- end }}
     {{- end }}
     <h1 class="post-title">{{ .Title }}</h1>

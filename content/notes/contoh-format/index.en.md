@@ -1,6 +1,7 @@
 ---
 title: "Formatting Example"
 slug: "formatting-example"
+aliases: ["/blog/formatting-example/"]  # old address
 date: 2026-11-26T20:00:00+07:00
 description: "An example of every element you can use in a post: headings, lists, quotes, code, tables, and images."
 tags: ["hugo", "guide"]
@@ -20,7 +21,7 @@ A regular paragraph with **bold text**, *italic text*, `inline code`, and [a lin
   - images live in the same folder
 - Push to GitHub and the site updates automatically
 
-1. Create a new folder in `content/blog/`
+1. Create a new folder in `content/notes/`
 2. Write `index.id.md`, plus `index.en.md` for the English version
 3. Commit and push
 
@@ -34,7 +35,7 @@ Code blocks scroll sideways on small screens:
 
 ```bash
 # create a new post (English version)
-hugo new content blog/post-title/index.en.md
+hugo new content notes/post-title/index.en.md
 
 # run a local server at http://localhost:1313
 hugo server --buildDrafts

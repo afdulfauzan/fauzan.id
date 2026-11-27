@@ -1,5 +1,6 @@
 ---
 title: "Contoh Format Tulisan"
+aliases: ["/blog/contoh-format/"]  # alamat lama /id/blog/contoh-format/ (Hugo menambah /id/ sendiri)
 date: 2026-11-26T20:00:00+07:00
 description: "Contoh semua elemen yang bisa dipakai dalam tulisan: judul, daftar, kutipan, kode, tabel, dan gambar."
 tags: ["hugo", "panduan"]
@@ -19,7 +20,7 @@ Paragraf biasa dengan **teks tebal**, *teks miring*, `kode inline`, dan [tautan 
   - gambar disimpan di folder yang sama
 - Push ke GitHub, situs otomatis diperbarui
 
-1. Buat folder baru di `content/blog/`
+1. Buat folder baru di `content/notes/`
 2. Tulis `index.id.md`, dan `index.en.md` untuk versi English
 3. Commit lalu push
 
@@ -33,7 +34,7 @@ Blok kode bisa digeser ke samping di layar kecil:
 
 ```bash
 # buat tulisan baru (versi Indonesia)
-hugo new content blog/judul-tulisan/index.id.md
+hugo new content notes/judul-tulisan/index.id.md
 
 # jalankan server lokal di http://localhost:1313
 hugo server --buildDrafts

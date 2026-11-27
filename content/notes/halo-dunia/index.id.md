@@ -1,5 +1,6 @@
 ---
 title: "Halo, Dunia"
+aliases: ["/blog/halo-dunia/"]  # alamat lama /id/blog/halo-dunia/ (Hugo menambah /id/ sendiri)
 date: 2026-11-25T09:00:00+07:00
 description: "Tulisan pertama di fauzan.id: tentang blog ini dan apa saja yang akan ditulis di sini."
 tags: ["catatan"]
