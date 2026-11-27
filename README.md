@@ -33,7 +33,7 @@ Hosting somewhere else? Set `baseURL` in `hugo.toml`, run `hugo build --minify`,
 | `content/contact.*.md` | The text on the Contact page |
 | `content/notes/` | Delete the sample notes. Keep `_index.*.md`: it holds the title and intro of the notes page. |
 | `layouts/_partials/logo.html` | Your logo as an inline SVG. Leave out fill colors so it follows light and dark mode. |
-| `static/` | Icons: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180×180). Link preview image: `og.png` (1200×630). |
+| `static/` | Icons: `favicon.svg`, `favicon-192.png` (192×192, the one Google Search can show), `favicon.ico` (16, 32 and 48 px), `apple-touch-icon.png` (180×180). Link preview image: `og.png` (1200×630). |
 | `i18n/` | Interface text for each language |
 
 A social link shows on the Contact page with `contact = true` and in the footer with `footer = true`. Set `monochromeImages = true` to show images in notes in grayscale.

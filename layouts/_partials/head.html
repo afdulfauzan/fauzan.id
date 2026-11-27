@@ -16,8 +16,12 @@
 {{- with resources.Get "css/main.css" | minify }}
 <style>{{ replace .Content "../fonts/" ("fonts/" | relURL) | safeCSS }}</style>
 {{- end }}
+{{- /* Icons. Google Search shows BMP, GIF, ICO, PNG, JPEG, PPM or TIFF favicons (not SVG) and
+     recommends more than 48×48px, so the 192px PNG comes first. Browsers that support SVG icons
+     use favicon.svg. favicon.ico (16/32/48) isn't linked: it's there for the requests browsers and
+     other tools make to /favicon.ico on their own, e.g. when showing the RSS feed. */}}
+<link rel="icon" href="{{ "favicon-192.png" | relURL }}" type="image/png" sizes="192x192">
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
-<link rel="icon" href="{{ "favicon-32.png" | relURL }}" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 {{- with site.Home.OutputFormats.Get "rss" }}
 <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
