@@ -79,4 +79,4 @@ Built with [Hugo](https://gohugo.io/). Fonts: [Inter](https://rsms.me/inter/) an
 
 ## License
 
-Released under the MIT License: https://github.com/afdulfauzan/fauzan.id/blob/main/LICENSE
+Released under the [MIT License](https://github.com/afdulfauzan/fauzan.id/blob/main/LICENSE).
