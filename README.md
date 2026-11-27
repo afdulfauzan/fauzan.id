@@ -76,3 +76,7 @@ Enter your domain in **Settings → Pages → Custom domain** and point its DNS 
 ## Credits
 
 Built with [Hugo](https://gohugo.io/). Fonts: [Inter](https://rsms.me/inter/) and [JetBrains Mono](https://www.jetbrains.com/lp/mono/), both under the SIL Open Font License 1.1 (see `static/fonts/`).
+
+## License
+
+Released under the MIT License: https://github.com/afdulfauzan/fauzan.id/blob/main/LICENSE
