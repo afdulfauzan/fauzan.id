@@ -565,7 +565,7 @@ a {
   height: 1.32em;
   vertical-align: -0.3em;
   background: var(--fg);
-  animation: blink 1s step-end var(--show) 3; /* then stays (WCAG 2.2.2) */
+  animation: blink 1s step-end var(--show) infinite; /* like a real terminal; solid with reduced motion */
 }
 /* covers a line until its time (--show) */
 .term-line::after,
