@@ -17,7 +17,7 @@
       </a>
     </li>
     {{- end }}
-    {{- range site.Params.social }}
+    {{- range where site.Params.social "contact" true }}
     <li>
       <a href="{{ .url }}" rel="me noopener">
         <span class="row-label">{{ .name }}</span>

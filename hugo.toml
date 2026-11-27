@@ -49,28 +49,30 @@ defaultContentLanguageInSubdir = false
 # ---------------------------------------------------------------------
 [params]
   author = "Fauzan"                  # GANTI: nama yang ditampilkan
-  email = "halo@fauzan.id"           # GANTI: email untuk halaman Contact
+  email = "me@fauzan.id"             # email di halaman Kontak
   monochromeImages = false           # true = gambar di tulisan tampil grayscale
 
-  # Link sosial (tampil di halaman Contact & footer). Tambah/hapus sesuka hati.
-  # floating = true → jadi tujuan tombol kontak bulat di pojok kanan bawah (dan tidak tampil di footer).
+  # Link sosial. contact = true → tampil di halaman Kontak, footer = true → tampil di footer.
   [[params.social]]
     name = "Telegram"
-    url = "https://t.me/magdoarch"
-    handle = "@magdoarch"
-    floating = true
+    url = "https://t.me/afdulfauzan"
+    handle = "@afdulfauzan"
+    contact = true
   [[params.social]]
     name = "GitHub"
     url = "https://github.com/afdulfauzan"
     handle = "@afdulfauzan"
+    footer = true
   # [[params.social]]
   #   name = "LinkedIn"
   #   url = "https://www.linkedin.com/in/USERNAME"
   #   handle = "in/USERNAME"
+  #   contact = true
   # [[params.social]]
   #   name = "Instagram"
   #   url = "https://www.instagram.com/USERNAME"
   #   handle = "@USERNAME"
+  #   contact = true
 
 # ---------------------------------------------------------------------
 #  Bahasa
@@ -90,6 +92,10 @@ defaultContentLanguageInSubdir = false
       name = "Notes"
       pageRef = "/notes"
       weight = 20
+    [[languages.en.menus.main]]
+      name = "Contact"
+      pageRef = "/contact"
+      weight = 30
 
   [languages.id]
     label = "Bahasa Indonesia"
@@ -105,6 +111,10 @@ defaultContentLanguageInSubdir = false
       name = "Catatan"
       pageRef = "/notes"
       weight = 20
+    [[languages.id.menus.main]]
+      name = "Kontak"
+      pageRef = "/contact"
+      weight = 30
     # Catatan versi Indonesia beralamat /id/catatan/… (foldernya tetap content/notes/)
     [languages.id.permalinks.section]
       notes = "/catatan/"

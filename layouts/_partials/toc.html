@@ -1,6 +1,8 @@
-{{- /* Floating table of contents for long posts (h2 + h3).
+{{- /* Table of contents for long posts (h2 + h3).
      Shown automatically when a post has 3 or more headings;
-     `toc: false` in the front matter hides it, `toc: true` always shows it. */ -}}
+     `toc: false` in the front matter hides it, `toc: true` always shows it.
+     Wide screens: sidebar beside the post. Phones and tablets: a bar at the
+     bottom of the screen ("Contents" opens the list, "Back to top"). */ -}}
 {{- $toc := .TableOfContents }}
 {{- $count := len (findRE `<a href=` $toc) }}
 {{- $show := ge $count 3 }}
@@ -12,9 +14,16 @@
     {{ $toc | replaceRE `^\s*<nav id="TableOfContents">\s*` "" | replaceRE `\s*</nav>\s*$` "" | safeHTML }}
   </div>
 </nav>
-<button class="toc-toggle" type="button" aria-controls="toc" aria-expanded="false" aria-label="{{ T "toc_toggle" }}" title="{{ T "toc_toggle" }}">
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="5" cy="6.5" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="5" cy="17.5" r="1.5"/></svg>
-</button>
+<div class="read-bar">
+  <button class="read-bar-btn" type="button" aria-controls="toc" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="5" cy="6.5" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="5" cy="17.5" r="1.5"/></svg>
+    {{ T "toc_toggle" }}
+  </button>
+  <a class="read-bar-btn" href="#top" data-to-top>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19.5v-15M5.5 11 12 4.5 18.5 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {{ T "back_to_top" }}
+  </a>
+</div>
   {{- with resources.Get "js/toc.js" | minify | fingerprint }}
 <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
   {{- end }}

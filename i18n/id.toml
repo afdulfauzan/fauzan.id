@@ -21,10 +21,10 @@ all_tags = "Semua tag"
 tagged = "Catatan dengan tag"
 
 contact_links = "Kontak dan tautan"
-chat_on = "Chat lewat {{ .Name }}"
 
 toc_title = "Daftar isi"
 toc_toggle = "Daftar isi"
+back_to_top = "Ke atas"
 
 search_label = "Cari catatan"
 search_placeholder = "Cari catatan…"

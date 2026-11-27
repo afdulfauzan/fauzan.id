@@ -20,10 +20,10 @@ all_tags = "All tags"
 tagged = "Notes tagged"
 
 contact_links = "Contact and links"
-chat_on = "Chat on {{ .Name }}"
 
 toc_title = "On this page"
-toc_toggle = "Table of contents"
+toc_toggle = "Contents"
+back_to_top = "Back to top"
 
 search_label = "Search notes"
 search_placeholder = "Search notes…"

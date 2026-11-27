@@ -1,12 +1,12 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <p>© {{ now.Year }} {{ site.Params.author }}</p>
+    {{- with where site.Params.social "footer" true }}
     <ul class="footer-links">
-      {{- range site.Params.social }}
-        {{- if not .floating }}
+      {{- range . }}
       <li><a href="{{ .url }}" rel="me noopener">{{ .name }}</a></li>
-        {{- end }}
       {{- end }}
     </ul>
+    {{- end }}
   </div>
 </footer>

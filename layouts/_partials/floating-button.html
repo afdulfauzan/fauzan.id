@@ -1,9 +1,0 @@
-{{- /* Round contact button in the bottom-right corner. It links to the social
-     entry marked `floating = true` in hugo.toml (Telegram for now). */ -}}
-{{- range first 1 (where site.Params.social "floating" true) }}
-  {{- $label := T "chat_on" (dict "Name" .name) }}
-  {{- with .handle }}{{ $label = printf "%s (%s)" $label . }}{{ end }}
-<a class="fab" href="{{ .url }}" rel="me noopener" aria-label="{{ $label }}" title="{{ $label }}">
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M6 3h12a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-7l-3.9 3.4A.6.6 0 0 1 6 19.95V17a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm1.75 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm4.25 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm4.25 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
-</a>
-{{- end }}
