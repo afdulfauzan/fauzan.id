@@ -7,6 +7,7 @@ Demo: https://afdulfauzan.github.io/fauzan.id/
 - Light and dark mode: follows the system setting, with a toggle
 - Notes with tags, search, and a table of contents on long notes
 - Copy buttons on code blocks
+- Images open full screen when tapped
 - Two languages with a switch in the header, or just one
 - RSS, a sitemap, and link previews (Open Graph)
 - Self-hosted fonts; nothing loads from other sites

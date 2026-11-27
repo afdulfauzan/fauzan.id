@@ -1,7 +1,9 @@
 {{- /*
   Markdown images → responsive WebP with srcset when the image is a page
   resource (an image in the post's folder) or a global resource (assets/).
-  Standalone images become <figure>; the optional title becomes the caption:
+  Standalone images become a <figure>, shown smaller than the text column;
+  tapping one opens it full screen (assets/js/zoom.js), or opens the image
+  file when JavaScript is off. The optional title becomes the caption:
     ![Alt text](photo.jpg "Caption")
 */ -}}
 {{- $u := urls.Parse .Destination -}}
@@ -9,6 +11,9 @@
 {{- $srcset := "" -}}
 {{- $width := 0 -}}
 {{- $height := 0 -}}
+{{- $full := $src -}}{{/* the image shown full screen */}}
+{{- $fullW := 0 -}}
+{{- $fullH := 0 -}}
 {{- if not $u.IsAbs -}}
   {{- $path := strings.TrimPrefix "./" $u.Path -}}
   {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
@@ -32,24 +37,39 @@
       {{- $srcset = delimit $set ", " -}}
       {{- $width = $main.Width -}}
       {{- $height = $main.Height -}}
+      {{- /* full screen: the original size, at most 2400px wide */ -}}
+      {{- $big := $main -}}
+      {{- if gt $orig.Width 2400 -}}
+        {{- $big = $orig.Resize "2400x webp q80" -}}
+      {{- else if gt $orig.Width $main.Width -}}
+        {{- $big = $orig.Process "webp q80" -}}
+      {{- end -}}
+      {{- $full = $big.RelPermalink -}}
+      {{- $fullW = $big.Width -}}
+      {{- $fullH = $big.Height -}}
     {{- else -}}
       {{- $src = $orig.RelPermalink -}}
+      {{- $full = $src -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- $sizes := "(min-width: 46rem) 42rem, 100vw" -}}
 {{- if .IsBlock -}}
+{{- .Page.Store.Set "hasZoom" true -}}
+{{- /* preview: at most 26rem and 3/4 of the screen wide (see .prose figure img in main.css) */ -}}
 <figure>
-  <img src="{{ $src }}" alt="{{ .PlainText }}"
-    {{- with $srcset }} srcset="{{ . }}" sizes="{{ $sizes }}"{{ end }}
-    {{- with $width }} width="{{ . }}" height="{{ $height }}"{{ end }} loading="lazy" decoding="async">
+  <a class="zoom" href="{{ $full }}"{{ with $fullW }} data-w="{{ . }}" data-h="{{ $fullH }}"{{ end }}>
+    <img src="{{ $src }}" alt="{{ .PlainText }}"
+      {{- with $srcset }} srcset="{{ . }}" sizes="(min-width: 34.7rem) 26rem, 75vw"{{ end }}
+      {{- with $width }} width="{{ . }}" height="{{ $height }}" style="--w: {{ . }}px; --r: {{ printf "%.4f" (div (float .) $height) }}"{{ end }} loading="lazy" decoding="async">
+    <span class="visually-hidden">{{ T "image_full" }}</span>
+  </a>
   {{- with .Title }}
   <figcaption>{{ . }}</figcaption>
   {{- end }}
 </figure>
 {{- else -}}
 <img src="{{ $src }}" alt="{{ .PlainText }}"
-  {{- with $srcset }} srcset="{{ . }}" sizes="{{ $sizes }}"{{ end }}
+  {{- with $srcset }} srcset="{{ . }}" sizes="(min-width: 46rem) 42rem, 100vw"{{ end }}
   {{- with $width }} width="{{ . }}" height="{{ $height }}"{{ end }}
   {{- with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
 {{- end -}}

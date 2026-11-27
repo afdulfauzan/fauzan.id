@@ -29,6 +29,8 @@ back_to_top = "Ke atas"
 copy = "Salin"
 copied = "Disalin"
 copy_failed = "Gagal"
+image_full = "Lihat ukuran penuh"
+close = "Tutup"
 
 search_label = "Cari catatan"
 search_placeholder = "Cari catatan…"

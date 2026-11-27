@@ -15,5 +15,10 @@
   <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" data-msg-copy="{{ T "copy" }}" data-msg-copied="{{ T "copied" }}" data-msg-failed="{{ T "copy_failed" }}" defer></script>
     {{- end }}
   {{- end }}
+  {{- if .Store.Get "hasZoom" }}
+    {{- with resources.Get "js/zoom.js" | minify | fingerprint }}
+  <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" data-msg-close="{{ T "close" }}" defer></script>
+    {{- end }}
+  {{- end }}
 </body>
 </html>

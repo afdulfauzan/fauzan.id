@@ -28,6 +28,8 @@ back_to_top = "Back to top"
 copy = "Copy"
 copied = "Copied"
 copy_failed = "Failed"
+image_full = "View full size"
+close = "Close"
 
 search_label = "Search notes"
 search_placeholder = "Search notes…"

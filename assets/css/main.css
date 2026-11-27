@@ -1216,12 +1216,28 @@ a {
   vertical-align: top;
 }
 
-/* images */
+/* images: standalone images are shown smaller than the text column; a tap or
+   click opens them full screen (.viewer below, assets/js/zoom.js) */
 .prose figure {
-  margin-inline: 0;
+  width: min-content; /* as wide as the image, so the caption wraps under it */
+  max-width: 100%;
+  margin-inline: auto;
+}
+.prose figure img {
+  /* its own width, but at most 26rem, 3/4 of the screen, and 22rem tall
+     (--w and --r = width and width/height ratio, set by render-image.html) */
+  width: min(var(--w, 26rem), 26rem, 75vw, 22rem * var(--r, 2));
+  max-width: none; /* a % max-width would let the figure shrink it to the caption's longest word */
 }
 .prose img {
   border: 1px solid var(--line);
+}
+.prose a.zoom {
+  display: block;
+  cursor: zoom-in;
+}
+.prose a.zoom:hover {
+  background: none;
 }
 .prose figcaption {
   margin-top: 0.625rem;
@@ -1259,9 +1275,9 @@ a {
   text-decoration: none;
 }
 
-/* phones: let code, tables and figures use the full screen width */
+/* phones: let code and tables use the full screen width */
 @media (max-width: 39.99rem) {
-  .prose > :is(pre, .highlight, .code-block, .table-wrap, figure) {
+  .prose > :is(pre, .highlight, .code-block, .table-wrap) {
     margin-inline: calc(-1 * var(--gutter));
   }
   .prose > pre,
@@ -1282,12 +1298,91 @@ a {
   .prose > .table-wrap {
     padding-inline: var(--gutter);
   }
-  .prose > figure img {
-    border-inline: 0;
+}
+
+/* ---------- Full-screen image view (assets/js/zoom.js) ---------- */
+.viewer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  border: 0;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: zoom-out;
+  overscroll-behavior: contain;
+}
+.viewer[open] {
+  display: grid;
+  grid-template-rows: var(--bar-h) minmax(0, 1fr) auto;
+  animation: viewer-in 0.15s ease;
+}
+.viewer::backdrop {
+  background: var(--bg);
+}
+@keyframes viewer-in {
+  from {
+    opacity: 0;
   }
-  .prose > figure figcaption {
-    padding-inline: var(--gutter);
+}
+:root:has(.viewer[open]) {
+  overflow: hidden; /* the page behind doesn't scroll */
+}
+.viewer-close {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: var(--bar-h);
+  height: var(--bar-h);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.viewer-close svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.viewer-close:focus-visible {
+  outline-offset: -4px;
+}
+.viewer-close:active {
+  background: var(--fg);
+  color: var(--bg);
+}
+@media (hover: hover) {
+  .viewer-close:hover {
+    background: var(--fg);
+    color: var(--bg);
   }
+}
+.viewer-stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding-inline: var(--gutter);
+}
+.viewer-img {
+  /* zoom.js sets the exact size; these limits cover images of unknown size */
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid var(--line); /* keeps the edges visible on a background of the same colour */
+  object-fit: contain;
+}
+.viewer-caption {
+  min-height: var(--bar-h);
+  margin: 0;
+  padding: 0.875rem var(--gutter);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  text-align: center;
 }
 
 /* ---------- Syntax highlighting (Chroma), monochrome ---------- */
@@ -1514,6 +1609,7 @@ a {
   .toc,
   .read-bar,
   .code-copy,
+  .viewer,
   .post-nav,
   .site-footer {
     display: none;
