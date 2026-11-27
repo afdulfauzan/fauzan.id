@@ -6,7 +6,7 @@
   {{- end }}
 </header>
 
-<div class="wrap">
+<div class="wrap block">
   {{- $pager := .Paginator }}
   {{- with $pager.Pages }}
     {{ partial "post-list.html" (dict "pages" . "level" 2 "summary" true) }}

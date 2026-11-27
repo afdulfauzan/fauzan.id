@@ -4,7 +4,7 @@
   <h1 class="page-title">#{{ .Title }}</h1>
 </header>
 
-<div class="wrap">
+<div class="wrap block">
   {{- $pager := .Paginator }}
   {{ partial "post-list.html" (dict "pages" $pager.Pages "level" 2 "summary" true) }}
   {{ partial "pager.html" $pager }}

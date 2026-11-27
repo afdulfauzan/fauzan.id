@@ -1135,16 +1135,22 @@ a {
   color: var(--bg);
 }
 
-/* ---------- Floating button (bottom-right, e.g. Telegram) ---------- */
+/* ---------- Floating button (bottom-right, e.g. Telegram) ----------
+   Sticky rather than fixed: it floats in the corner while you scroll and
+   stops just above the footer, so it never covers the footer links.
+   It sits between <main> and the footer; <body> is a flex column. */
 .fab {
-  position: fixed;
-  right: max(1rem, env(safe-area-inset-right));
+  position: sticky;
   bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 40;
+  align-self: flex-end;
+  flex: none;
   display: grid;
   place-items: center;
   width: 3.5rem;
   height: 3.5rem;
+  /* the negative top margin tucks it into the empty space at the end of the page */
+  margin: -2.25rem max(1rem, env(safe-area-inset-right)) 1rem 0;
   border-radius: 50%;
   background: var(--fg);
   color: var(--bg);
@@ -1164,13 +1170,6 @@ a {
   background: var(--bg);
   color: var(--fg);
   box-shadow: 0 0 0 2px var(--fg);
-}
-
-/* phones & tablets: keep the end of the footer clear of the floating button */
-@media (max-width: 55rem) {
-  .site-footer {
-    padding-bottom: 4rem;
-  }
 }
 
 /* ---------- Motion & print ---------- */
