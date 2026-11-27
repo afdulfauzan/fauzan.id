@@ -25,6 +25,9 @@
   {{- if $isPost }}{{ with .Summary }}{{ $desc = . | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}{{ end -}}
 {{- end -}}
 {{- $desc = $desc | truncate 160 -}}
+{{- /* truncate returns HTML-escaped text (I'm → I&#39;m); fine in attributes, but the
+     JSON-LD needs the plain text or it would literally say &#39; */ -}}
+{{- $descText := $desc | htmlUnescape -}}
 
 {{- /* Share image: front matter `cover` (page resource) or the default og.png */ -}}
 {{- $ogURL := "og.png" | absURL -}}
@@ -84,7 +87,7 @@
   "@context" "https://schema.org"
   "@type" "BlogPosting"
   "headline" .Title
-  "description" $desc
+  "description" $descText
   "datePublished" (.PublishDate.Format "2006-01-02T15:04:05Z07:00")
   "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
   "inLanguage" site.Language.Locale
@@ -99,6 +102,6 @@
   "name" site.Title
   "url" site.Home.Permalink
   "inLanguage" site.Language.Locale
-  "description" $desc
+  "description" $descText
   | jsonify | safeJS }}</script>
 {{- end }}
