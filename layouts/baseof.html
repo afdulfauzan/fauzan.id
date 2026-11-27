@@ -10,5 +10,10 @@
     {{- block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{- if .Store.Get "hasCode" }}
+    {{- with resources.Get "js/code.js" | minify | fingerprint }}
+  <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" data-msg-copy="{{ T "copy" }}" data-msg-copied="{{ T "copied" }}" data-msg-failed="{{ T "copy_failed" }}" defer></script>
+    {{- end }}
+  {{- end }}
 </body>
 </html>

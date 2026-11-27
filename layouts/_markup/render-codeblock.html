@@ -1,0 +1,11 @@
+{{- /* Fenced code blocks get a small header row: the language on the left
+     (shown from data-lang by CSS) and a copy button that assets/js/code.js
+     adds on the right. The header holds no text of its own, so summaries,
+     the RSS feed and the search index stay clean. */ -}}
+{{- .Page.Store.Set "hasCode" true -}}
+{{- $lang := .Type -}}
+{{- if in (slice "text" "txt" "plain" "plaintext") $lang }}{{ $lang = "" }}{{ end -}}
+<div class="code-block">
+  <div class="code-head"{{ with $lang }} data-lang="{{ . }}"{{ end }}></div>
+  {{- (transform.HighlightCodeBlock .).Wrapped }}
+</div>

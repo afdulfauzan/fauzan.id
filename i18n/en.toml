@@ -25,6 +25,10 @@ toc_title = "On this page"
 toc_toggle = "Contents"
 back_to_top = "Back to top"
 
+copy = "Copy"
+copied = "Copied"
+copy_failed = "Failed"
+
 search_label = "Search notes"
 search_placeholder = "Search notes…"
 search_result_one = "1 note found for “{q}”"

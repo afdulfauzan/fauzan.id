@@ -1118,6 +1118,77 @@ a {
   font-size: inherit;
 }
 
+/* code block header: the language (from data-lang) and a copy button that
+   assets/js/code.js adds; see layouts/_markup/render-codeblock.html */
+.code-block {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.prose .code-block pre {
+  border: 0;
+}
+.code-head {
+  display: flex;
+  min-height: 2.5rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.code-head[data-lang]::before {
+  content: attr(data-lang);
+  align-self: center;
+  padding-left: 1.125rem;
+  color: var(--muted);
+}
+:root:not([data-theme]) .code-head:not([data-lang]) {
+  display: none; /* no language and no copy button without JavaScript */
+}
+.code-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  margin-left: auto;
+  padding: 0 1.125rem;
+  border: 0;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.code-copy svg {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+}
+.code-copy svg + svg,
+.code-copy[data-state="copied"] svg:first-child {
+  display: none;
+}
+.code-copy[data-state="copied"] svg + svg {
+  display: block;
+}
+.code-copy:focus-visible {
+  outline-color: currentColor;
+  outline-offset: -3px;
+}
+.code-copy:active {
+  background: var(--fg);
+  color: var(--bg);
+}
+@media (hover: hover) {
+  .code-copy:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+}
+
 /* tables */
 .table-wrap {
   overflow-x: auto;
@@ -1190,12 +1261,22 @@ a {
 
 /* phones: let code, tables and figures use the full screen width */
 @media (max-width: 39.99rem) {
-  .prose > :is(pre, .highlight, .table-wrap, figure) {
+  .prose > :is(pre, .highlight, .code-block, .table-wrap, figure) {
     margin-inline: calc(-1 * var(--gutter));
   }
   .prose > pre,
-  .prose > .highlight pre {
+  .prose > .highlight pre,
+  .prose > .code-block pre {
     border-inline: 0;
+    padding-inline: var(--gutter);
+  }
+  .prose > .code-block {
+    border-inline: 0;
+  }
+  .prose > .code-block .code-head::before {
+    padding-left: var(--gutter);
+  }
+  .prose > .code-block .code-copy {
     padding-inline: var(--gutter);
   }
   .prose > .table-wrap {
@@ -1432,6 +1513,7 @@ a {
   .caret,
   .toc,
   .read-bar,
+  .code-copy,
   .post-nav,
   .site-footer {
     display: none;

@@ -26,6 +26,10 @@ toc_title = "Daftar isi"
 toc_toggle = "Daftar isi"
 back_to_top = "Ke atas"
 
+copy = "Salin"
+copied = "Disalin"
+copy_failed = "Gagal"
+
 search_label = "Cari catatan"
 search_placeholder = "Cari catatan…"
 search_result_one = "1 catatan ditemukan untuk “{q}”"
