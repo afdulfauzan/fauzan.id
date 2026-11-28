@@ -191,11 +191,15 @@ a {
   padding-block: 0.375rem;
 }
 
+/* The link is a comfortable tap target around the small logo. The padding keeps the logo in
+   the middle of it, so a tap highlight or focus ring sits on the logo; the negative margin
+   (inside the page gutter) keeps the logo in line with the content below. */
 .brand {
   display: inline-flex;
   align-items: center;
-  min-width: 36px; /* comfortable tap target around the small logo */
   min-height: 44px;
+  padding-inline: 0.5rem;
+  margin-left: -0.5rem;
   margin-right: auto; /* pushes the menu and buttons to the right */
 }
 .logo {
