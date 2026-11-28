@@ -1298,6 +1298,11 @@ a {
 }
 
 /* inline code & keys */
+/* Show commands exactly as typed: JetBrains Mono's ligatures would join -- into what looks
+   like a dash, and readers copy commands by eye too. */
+.prose :is(code, kbd, samp, pre) {
+  font-variant-ligatures: none;
+}
 .prose :not(pre) > code {
   padding: 0.1em 0.35em;
   border: 1px solid var(--line);
